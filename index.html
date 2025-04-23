@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Notes - Advanced Note Taking App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-edit"></i> Pro Notes</h1>
+            <div class="header-controls">
+                <button id="view-toggle" class="btn"><i class="fas fa-columns"></i> <span>Kanban View</span></button>
+                <button id="stats-toggle" class="btn"><i class="fas fa-chart-line"></i></button>
+                <button id="theme-toggle" class="btn"><i class="fas fa-moon"></i></button>
+                <button id="voice-note" class="btn"><i class="fas fa-microphone"></i></button>
+            </div>
+        </header>
+
+        <div class="pomodoro-container hidden">
+            <div class="pomodoro-display">
+                <span id="pomodoro-timer">25:00</span>
+                <div class="pomodoro-controls">
+                    <button id="pomodoro-start" class="btn accent"><i class="fas fa-play"></i> Start</button>
+                    <button id="pomodoro-pause" class="btn"><i class="fas fa-pause"></i> Pause</button>
+                    <button id="pomodoro-reset" class="btn"><i class="fas fa-redo"></i> Reset</button>
+                    <button id="pomodoro-close" class="btn"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="pomodoro-task">
+                <i class="fas fa-tasks"></i>
+                Current Task: <span id="current-pomodoro-task">None selected</span>
+            </div>
+        </div>
+
+        <div class="kanban-container hidden">
+            <div class="kanban-column" data-status="todo">
+                <h3><i class="fas fa-circle-notch"></i> To Do</h3>
+                <div class="kanban-items" id="todo-items"></div>
+            </div>
+            <div class="kanban-column" data-status="in-progress">
+                <h3><i class="fas fa-spinner"></i> In Progress</h3>
+                <div class="kanban-items" id="in-progress-items"></div>
+            </div>
+            <div class="kanban-column" data-status="done">
+                <h3><i class="fas fa-check-circle"></i> Done</h3>
+                <div class="kanban-items" id="done-items"></div>
+            </div>
+        </div>
+
+        <div class="list-container">
+            <div class="input-container">
+                <input type="text" id="note-input" placeholder="Add a new note (try 'Meeting tomorrow at 2pm #work')" aria-label="Add new note">
+                <button id="add-note" class="btn" aria-label="Add note"><i class="fas fa-plus"></i></button>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search notes..." aria-label="Search notes">
+            </div>
+            
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Notes</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="important">Important</button>
+                
+                <div class="tag-filter">
+                    <i class="fas fa-tag"></i>
+                    <select id="tag-filter" class="tag-select">
+                        <option value="">All Tags</option>
+                        <option value="#work">Work</option>
+                        <option value="#personal">Personal</option>
+                        <option value="#shopping">Shopping</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="notes-list" id="notes-list">
+                <!-- Notes will be inserted here by JavaScript -->
+                <div class="empty-state">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>No notes yet</h3>
+                    <p>Add your first note to get started</p>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stats-item">
+                    <span id="total-notes">0</span>
+                    <span>Total</span>
+                </div>
+                <div class="stats-item">
+                    <span id="completed-notes">0</span>
+                    <span>Completed</span>
+                </div>
+                <div class="stats-item">
+                    <span id="important-notes">0</span>
+                    <span>Important</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container hidden">
+            <canvas id="productivity-chart"></canvas>
+        </div>
+    </div>
+
+    <div class="confetti-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
